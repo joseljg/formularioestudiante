@@ -72,12 +72,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         alerta1.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
                 mostrarAlumno();
             }
         });
         alerta1.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
                 mostrarMensaje();
             }
         });
@@ -92,5 +94,44 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void mostrarAlumno() {
         Toast.makeText(this,"dni->" + dni + "\n" + "nombre->"+ nombre + "\n"+ "fecha de nacimiento " + fechan + "\n" + "hora preferida de llamada " + horap + "\n" + "curso->" + curso, Toast.LENGTH_LONG).show();
+    }
+
+    public void coger_fecha(View view) {
+    DatePickerFragment calendario1 = new DatePickerFragment();
+    calendario1.show(getSupportFragmentManager(),"DatePicker");
+    }
+
+    public void coger_hora(View view) {
+        TimePickerFragment reloj1 = new TimePickerFragment();
+        reloj1.show(getSupportFragmentManager(),"TimePicker");
+    }
+
+    public void crerFecha(int anyo, int mes, int dia) {
+        String texto_anyo = String.valueOf(anyo);
+        String texto_mes = String.valueOf(mes);
+        String texto_dia = String.valueOf(dia);
+        fechan = texto_dia + "/" + texto_mes + "/" + texto_anyo;
+        edt_fechan.setText(fechan);
+    }
+
+    public void crearHora(int horas, int minutos) {
+        String texto_hora ="";
+        String texto_minutos ="";
+        if(horas <10)
+        {
+           texto_hora = "0"+ String.valueOf(horas) ;
+        }
+        else{
+            texto_hora = String.valueOf(horas);
+        }
+        if(minutos <10)
+        {
+            texto_minutos = "0"+ String.valueOf(minutos);
+        }
+        else{
+            texto_minutos =  String.valueOf(minutos);
+        }
+        horap = texto_hora+":"+texto_minutos;
+        edt_horap.setText(horap);
     }
 }
